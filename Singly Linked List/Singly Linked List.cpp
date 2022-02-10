@@ -14,6 +14,49 @@ Node* head = NULL;		//	연결리스트의 첫 번째 노드의 주소를 저장할 포인터.
 						//	main 에서 지역 변수로 head를 선언하고 사용한다면, 함수에서 head의 주솟값을 매개 변수로 받아야한다. 
 						//	단순연결리스트에서 -> 어떤 노드를 삽입, 삭제하기위해서는 항상 그 앞 노드의 주소를 알아야 가능하다.
 
+void add_first(char* item);
+int add_after(Node* prev, char* item);
+int add(int index, char* item);
+void add_to_ordered_list(char* item);
+
+Node* remove_first();
+Node* remove_after(Node* prev);
+Node* remove(int index);
+Node* remove(char* item);
+
+Node* find(char* word);
+Node* get_node(int index);
+
+int main() {
+	/*
+	실제로는 이렇게 일일이 쓰지 않고, 함수화 해서 사용
+
+	head = (Node*)malloc(sizeof(Node));
+	head->data = "Tuesday";
+	head->next = NULL;
+
+	Node* q = (Node*)malloc(sizeof(Node));
+	q->data = "Thursday";
+	q->next = NULL;
+	head->next = q;		//	노드 두 개를 연결
+
+	//	제일 앞에 삽입
+	q = (Node*)malloc(sizeof(Node));
+	q->data = "Monday";
+	q->next = head;		//	노드 두 개를 연결
+	head = q;
+
+	//	노드를 처음부터 끝까지 돌면서 data 출력
+	Node* p = head;		//	탐색용 노드 포인터 p. head 는 항상 첫 노드를 가리키고 있어야하기 때문에
+	while (p != NULL) {
+		printf("%s\n", p->data);
+		p = p->next;	//	매우 자주 나오는 코드 (한 칸 전진)
+	}
+	*/
+	//add_first("주한");
+
+}
+
 //	연결리스트의 맨 앞에 새로운 노드를 삽입하는 함수
 void add_first(char* item) {
 	Node* temp = (Node*)malloc(sizeof(Node));
@@ -24,7 +67,7 @@ void add_first(char* item) {
 
 //	지정한 노드 뒤에 새로운 노드를 삽입하는 함수
 //	삽입에 성공하면 1을 반환, 실패하면 0을 반환
-int add_after(Node *prev, char *item) {
+int add_after(Node* prev, char* item) {
 	if (prev == NULL) {
 		return 0;
 	}
@@ -53,7 +96,7 @@ Node* remove_first() {
 //	지정한 노드의 다음 노드를 삭제하는 함수
 //	단순연결리스트에서, 어떤 노드를 삭제할 때는 삭제할 노드의 바로 앞 노드의 주소가 필요하다. 삭제할 노드의 주소만으로는 삭제할 수 없다.
 //	삭제한 노드의 주소를 반환
-Node* remove_after(Node *prev) {
+Node* remove_after(Node* prev) {
 	Node* tmp = prev->next;
 	if (tmp == NULL) {		//	다음 노드가 없을 경우 NULL 반환하며 종료
 		return NULL;
@@ -67,7 +110,7 @@ Node* remove_after(Node *prev) {
 //	연결리스트를 순회하는 함수 (traverse)
 //	순회하는 목적은 다양할 수 있음. 이 함수에서는 검색하는 것이 목적.
 //	찾고자하는 문자열과 동일한 단어를 저장한 모든 노드들을 찾아서 그 노드들의 주소를 반환
-Node* find(char *word) {
+Node* find(char* word) {
 	Node* p = head;		//	head는 건드리지 않기!!
 	while (p != NULL) {
 		if (strcmp(p->data, word) == 0) {	//	p->data 와 word 가 같다면
@@ -100,7 +143,7 @@ int add(int index, char* item) {
 		return 0;
 	}
 
-	if (index == 0){
+	if (index == 0) {
 		add_first(item);
 		return 1;
 	}
@@ -120,14 +163,15 @@ Node* remove(int index) {
 		return NULL;
 	}
 
-	if(index == 0) {
+	if (index == 0) {
 		return remove_first();
 	}
 
 	Node* prev = get_node(index - 1);
 	if (prev == NULL) {
 		return NULL;
-	}else{
+	}
+	else {
 		return remove_after(prev);
 	}
 }
@@ -163,39 +207,6 @@ void add_to_ordered_list(char* item) {
 		add_first(item);
 	}
 	else {
-		add_after(q);
+		add_after(q, item);
 	}
-
-}
-
-
-
-
-int main() {
-	/*
-	실제로는 이렇게 일일이 쓰지 않고, 함수화 해서 사용
-
-	head = (Node*)malloc(sizeof(Node));
-	head->data = "Tuesday";
-	head->next = NULL;
-
-	Node* q = (Node*)malloc(sizeof(Node));
-	q->data = "Thursday";
-	q->next = NULL;
-	head->next = q;		//	노드 두 개를 연결
-
-	//	제일 앞에 삽입
-	q = (Node*)malloc(sizeof(Node));
-	q->data = "Monday";
-	q->next = head;		//	노드 두 개를 연결
-	head = q;
-
-	//	노드를 처음부터 끝까지 돌면서 data 출력
-	Node* p = head;		//	탐색용 노드 포인터 p. head 는 항상 첫 노드를 가리키고 있어야하기 때문에
-	while (p != NULL) {
-		printf("%s\n", p->data);
-		p = p->next;	//	매우 자주 나오는 코드 (한 칸 전진)
-	}
-	*/
-	
 }

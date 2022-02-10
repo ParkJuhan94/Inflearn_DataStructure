@@ -1,2 +1,3 @@
 ﻿  Singly Linked List.cpp
+C:\Users\1004s\OneDrive\Desktop\Repository\VS\Inflearn_DataStructure\Singly Linked List\Singly Linked List.cpp(136): warning C4715: 'get_node': not all control paths return a value
   Singly Linked List.vcxproj -> C:\Users\1004s\OneDrive\Desktop\Repository\VS\Inflearn_DataStructure\Debug\Singly Linked List.exe
