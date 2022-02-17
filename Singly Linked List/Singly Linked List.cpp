@@ -13,19 +13,22 @@ Node* head = NULL;		//	연결리스트의 첫 번째 노드의 주소를 저장할 포인터.
 						//	전역 변수로 두는 것이 여러 함수에서 사용하기에 편리하다.
 						//	main 에서 지역 변수로 head를 선언하고 사용한다면, 함수에서 head의 주솟값을 매개 변수로 받아야한다. 
 						//	단순연결리스트에서 -> 어떤 노드를 삽입, 삭제하기위해서는 항상 그 앞 노드의 주소를 알아야 가능하다.
+Node* cursor = NULL;
+Node* tmpNP = NULL;
 
-void add_first(char* item);
-int add_after(Node* prev, char* item);
-int add(int index, char* item);
-void add_to_ordered_list(char* item);
+void add_first(const char* item);
+int add_after(Node* prev, const char* item);
+int add(int index, const char* item);
+void add_to_ordered_list(const char* item);
 
 Node* remove_first();
 Node* remove_after(Node* prev);
 Node* remove(int index);
 Node* remove(char* item);
 
-Node* find(char* word);
+Node* find(const char* word);
 Node* get_node(int index);
+
 
 int main() {
 	/*
@@ -53,12 +56,48 @@ int main() {
 		p = p->next;	//	매우 자주 나오는 코드 (한 칸 전진)
 	}
 	*/
-	//add_first("주한");
 
+	printf("나와 친구들을 연결리스트에 저장한다.ㅋ\n");
+	add_first("[주한]");
+	add_first("[준호]");
+	add_first("[위상]");
+	add_first("[석빈]");
+
+	cursor = head;
+	for (int i = 0; i < 4; i++) {
+		printf("%s --> ", cursor->data);
+		cursor = cursor->next;
+	}
+	printf("[끝]\n\n===================================\n\n");
+
+	printf("이번엔 제일 앞에 놈 삭제한다.ㅋ\n");
+	remove_first();
+	cursor = head;
+	for (int i = 0; i < 3; i++) {
+		printf("%s --> ", cursor->data);
+		cursor = cursor->next;
+	}
+	printf("[끝]\n\n===================================\n\n");
+
+	printf("이번엔 자기 다음에 여자친구 끼워준다.ㅋ\n");
+	tmpNP = get_node(0);
+	add_after(tmpNP, "[없음]");
+	tmpNP = get_node(2);
+	add_after(tmpNP, "[도경]");
+	tmpNP = get_node(4);
+	add_after(tmpNP, "[없음]");
+
+	cursor = head;
+	for (int i = 0; i < 6; i++) {
+		printf("%s --> ", cursor->data);
+		cursor = cursor->next;
+	}
+	printf("[끝]\n\n===================================\n\n");
 }
 
+
 //	연결리스트의 맨 앞에 새로운 노드를 삽입하는 함수
-void add_first(char* item) {
+void add_first(const char* item) {
 	Node* temp = (Node*)malloc(sizeof(Node));
 	temp->data = item;
 	temp->next = head;
@@ -67,7 +106,7 @@ void add_first(char* item) {
 
 //	지정한 노드 뒤에 새로운 노드를 삽입하는 함수
 //	삽입에 성공하면 1을 반환, 실패하면 0을 반환
-int add_after(Node* prev, char* item) {
+int add_after(Node* prev, const char* item) {
 	if (prev == NULL) {
 		return 0;
 	}
@@ -110,7 +149,7 @@ Node* remove_after(Node* prev) {
 //	연결리스트를 순회하는 함수 (traverse)
 //	순회하는 목적은 다양할 수 있음. 이 함수에서는 검색하는 것이 목적.
 //	찾고자하는 문자열과 동일한 단어를 저장한 모든 노드들을 찾아서 그 노드들의 주소를 반환
-Node* find(char* word) {
+Node* find(const char* word) {
 	Node* p = head;		//	head는 건드리지 않기!!
 	while (p != NULL) {
 		if (strcmp(p->data, word) == 0) {	//	p->data 와 word 가 같다면
@@ -131,14 +170,14 @@ Node* get_node(int index) {
 	Node* p = head;		//	head는 건드리지 않기!!
 	for (int i = 0; i < index && p != NULL; i++) {		//	p != NULL 조건을 걸어서, index가 max index를 넘어가지 않도록 함
 		p = p->next;
-		return p;
 	}
+	return p;
 }
 
 //	연결리스트의 index번째 위치에 새로운 노드를 만들어서 삽입하는 함수
 //	삽입 성공하면 1을 반환, 실패하면 0을 반환
 //	기존의 함수들을 활용
-int add(int index, char* item) {
+int add(int index, const char* item) {
 	if (index < 0) {
 		return 0;
 	}
@@ -196,7 +235,7 @@ Node* remove(char* item) {
 }
 
 //	연결리스트에 데이터들이 오름차순으로 정렬되어 있다는 가정하에서 새로운 데이터를 삽입하는 함수
-void add_to_ordered_list(char* item) {
+void add_to_ordered_list(const char* item) {
 	Node* p = head;
 	Node* q = NULL;
 	while (p != NULL && strcmp(p->data, item) <= 0) {
