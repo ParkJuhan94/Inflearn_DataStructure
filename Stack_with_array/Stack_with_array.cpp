@@ -19,6 +19,9 @@ void push(char ch) {
 }
 
 char pop() {	//	pop을 호출하기 전에 먼저 empty인지 검사해야 한다.
+	if (is_empty()) {
+		return NULL;
+	}
 	char tmp = stack[top];
 	top--;
 	return tmp;
