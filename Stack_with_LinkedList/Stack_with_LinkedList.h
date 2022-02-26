@@ -1,3 +1,4 @@
+#pragma once
 #include <stdio.h>
 
 void push(char* item);

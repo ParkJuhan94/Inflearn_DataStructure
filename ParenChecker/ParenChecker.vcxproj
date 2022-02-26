@@ -141,6 +141,17 @@
   <ItemGroup>
     <ClCompile Include="ParenChecker.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Singly Linked List\Singly Linked List.vcxproj">
+      <Project>{657e8e71-27ec-4bdc-bb73-e2bcbfc966c5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Stack_with_array\Stack_with_array.vcxproj">
+      <Project>{fd1ac6eb-9d39-4d37-9729-df30fc881829}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Stack_with_LinkedList\Stack_with_LinkedList.vcxproj">
+      <Project>{a0d43155-d7d5-427e-9cd1-e59e85ec1667}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
