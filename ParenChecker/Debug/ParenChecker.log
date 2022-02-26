@@ -1,1 +1,4 @@
-﻿
+﻿ParenChecker.obj : error LNK2019: unresolved external symbol "void __cdecl push(char)" (?push@@YAXD@Z) referenced in function "int __cdecl is_balanced(char *)" (?is_balanced@@YAHPAD@Z)
+ParenChecker.obj : error LNK2019: unresolved external symbol "char __cdecl pop(void)" (?pop@@YADXZ) referenced in function "int __cdecl is_balanced(char *)" (?is_balanced@@YAHPAD@Z)
+ParenChecker.obj : error LNK2019: unresolved external symbol "int __cdecl is_empty(void)" (?is_empty@@YAHXZ) referenced in function "int __cdecl is_balanced(char *)" (?is_balanced@@YAHPAD@Z)
+C:\Users\1004s\OneDrive\Desktop\Repository\VS\Inflearn_DataStructure\Debug\ParenChecker.exe : fatal error LNK1120: 3 unresolved externals

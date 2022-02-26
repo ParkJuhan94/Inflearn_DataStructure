@@ -1,2 +1,3 @@
 ﻿  Singly Linked List.cpp
-  Singly Linked List.vcxproj -> C:\Users\1004s\OneDrive\Desktop\Repository\VS\Inflearn_DataStructure\Debug\Singly Linked List.exe
+MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol _main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
+C:\Users\1004s\OneDrive\Desktop\Repository\VS\Inflearn_DataStructure\Debug\Singly Linked List.exe : fatal error LNK1120: 1 unresolved externals

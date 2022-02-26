@@ -29,7 +29,7 @@ Node* remove(char* item);
 Node* find(const char* word);
 Node* get_node(int index);
 
-
+/*
 int main() {
 	/*
 	실제로는 이렇게 일일이 쓰지 않고, 함수화 해서 사용
@@ -55,7 +55,7 @@ int main() {
 		printf("%s\n", p->data);
 		p = p->next;	//	매우 자주 나오는 코드 (한 칸 전진)
 	}
-	*/
+
 
 	printf("나와 친구들을 연결리스트에 저장한다.ㅋ\n");
 	add_first("[주한]");
@@ -94,7 +94,7 @@ int main() {
 	}
 	printf("[끝]\n\n===================================\n\n");
 }
-
+	*/
 
 //	연결리스트의 맨 앞에 새로운 노드를 삽입하는 함수
 void add_first(const char* item) {

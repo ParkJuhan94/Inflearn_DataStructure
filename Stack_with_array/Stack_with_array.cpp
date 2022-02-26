@@ -1,7 +1,6 @@
 //	배열을 이용한 스택 구현
 #define _CRT_SECURE_NO_WARNINGS
 #include "Stack_with_array.h"
-#include <stdio.h>
 #include <stdlib.h>
 #define MAX_CAPACITY 100
 

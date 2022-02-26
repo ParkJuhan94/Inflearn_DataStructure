@@ -18,6 +18,10 @@ void push(char* item) {
 	top = p;
 }
 
+int is_empty() {
+	return top == NULL;
+}
+
 char* pop() {
 	if (is_empty()) {
 		return NULL;
@@ -32,8 +36,4 @@ char* peek() {
 		return NULL;
 	}
 	return top->data;
-}
-
-int is_empty() {
-	return top == NULL;
 }
