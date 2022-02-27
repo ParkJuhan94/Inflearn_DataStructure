@@ -19,7 +19,6 @@ struct term {	//	c^e
 	int expo;	//	지수(차수)
 	struct term* next;		//	다음 항을 가리키는 포인터
 };
-
 typedef struct term Term;
 
 //	다항식 구조체
@@ -56,7 +55,7 @@ void add_term(int c, int e, Polynomial* poly) {
 		return;
 	Term* p = poly->first, *q = NULL;
 
-	while (p != NULL && p->expo > e) {
+	while (p != NULL && p->expo > e) {		//	q는 p의 한 칸 뒤를 따라옴
 		q = p;
 		p = p->next;
 	}
@@ -65,12 +64,72 @@ void add_term(int c, int e, Polynomial* poly) {
 		p->coef += c;
 		if (p->coef == 0) {		//	더했더니 계수가 0이 되는 경우
 			if (q == NULL)
-				poly->first = p->next;
+				poly->first = p->next;	//	q의 다음 노드를 삭제한다. 단, q가 NULL이면 첫번째 노드를 삭제한다. 
+			else
+				q->next = p->next;
+			poly->size--;
+			free(p);
 		}
+		return;
+	}
+
+	//	이까지 왔으면 동일 차수의 항이 존재하지 않는 경우: Term* 을 생성
+	Term* term = create_polynomial_instance();
+	term->coef = c;
+	term->expo = e;
+
+	if (q == NULL) {		//	맨 앞에 삽입하는 경우
+		term->next = poly->first;
+		poly->first = term;
+	}
+	else {					//	q의 뒤, p의 앞에 삽입(p는 NULL일 수도 있음)
+		term->next = p;
+		q->next = term;
+	}
+	poly->size++;
+}
+
+//	다항식의 값을 계산하는 함수
+int eval(polynomial* poly, int x) {
+	int result = 0;
+	Term* t = poly->first;
+	while (t != NULL) {
+		result += eval(t, x);	//	각각의 항의 값을 계산하여 더한다.
+		t = t->next;
+	}
+	return result;
+}
+
+//	하나의 항의 값을 계산하는 함수 -> c*x^e
+int eval(Term* term, int x) {	
+	int result = term->coef;
+	for (int i = 0; i < term->expo; i++) {
+		result *= x;
+	}
+	return result;
+}
+
+//	하나의 다항식을 출력하는 함수
+void print_poly(Polynomial* p) {
+	printf("%c=", p->name);
+	Term* t = p->first;
+	while (t != NULL) {
+		print_term(t);
+		printf("+");
+		t = t->next;
 	}
 }
 
+//	하나의 항을 출력하는 함수
+//	이 함수는 완벽하지 않다. 개선하는 것은 과제로 남겨 둔다.   -> 3x^2 +- 5x^1 + 3x^0  이런식으로 되는걸 개선
+void print_term(Term* pTerm) {
+	printf("%dx^%d", pTerm->coef, pTerm->expo);
+}
 
+//	main에서 호출되어서 사용자의 명령을 받아서 처리하는 함수
+void process_command() {
+
+}
 
 
 
