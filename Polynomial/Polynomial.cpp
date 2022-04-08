@@ -24,13 +24,12 @@ typedef struct term Term;
 //	다항식 구조체
 typedef struct polynomial {
 	char name;		//	f, g, h
-	Term* first;	//	첫번째 항
+	Term* first;	//	첫번째 항 
 	int size = 0;
 }Polynomial;
 
 Polynomial* polys[MAX_POLYS];	//	polys는 다항식들에 대한 포인터의 배열이다.
 int n = 0;	//	저장된 다항식의 개수이다.
-
 
 //	하나의 항을 만들어서 그 주솟값을 반환하는 함수
 Term* create_term_instance() {
@@ -110,7 +109,7 @@ int eval(Term* term, int x) {
 }
 
 //	하나의 다항식을 출력하는 함수
-void print_poly(Polynomial* p) {
+void print_poly(Polynomial* p) {  
 	printf("%c=", p->name);
 	Term* t = p->first;
 	while (t != NULL) {
