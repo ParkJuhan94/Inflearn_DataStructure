@@ -120,14 +120,33 @@ void print_poly(Polynomial* p) {
 }
 
 //	하나의 항을 출력하는 함수
-//	이 함수는 완벽하지 않다. 개선하는 것은 과제로 남겨 둔다.   -> 3x^2 +- 5x^1 + 3x^0  이런식으로 되는걸 개선
 void print_term(Term* pTerm) {
-	printf("%dx^%d", pTerm->coef, pTerm->expo);
+	if (pTerm->expo != 0) {
+		printf("%dx^%d", pTerm->coef, pTerm->expo);
+	}
 }
 
 //	main에서 호출되어서 사용자의 명령을 받아서 처리하는 함수
 void process_command() {
+	char command_line[BUFFER_LENGTH];
+	char copied[BUFFER_LENGTH];
+	char* command, * arg1, * arg2;
 
+	while (1) {
+		printf("$ ");
+		if (read_line(stdin, command_line, BUFFER_LENGTH) <= 0)
+			continue;
+		strcpy(copied, command_line);	//	입력 라인을 복사해 둔다.
+		command = strtok(command_line, " ");
+		if (strcmp(command, "print") == 0) {
+			arg1 = strtok(NULL, " ");
+			if (arg1 == NULL) {
+				printf("Invalid arguments.\n");
+				continue;
+			}
+			handle_print(arg1[0]);
+		}
+	}
 }
 
 
